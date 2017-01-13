@@ -123,7 +123,7 @@ class PdfDraw extends DecoratorPdf {
 		}
 	}
 
-	// Draws a Bézier curve (the Bézier curve is tangent to the line between the control points at either end of the curve)
+	// Draws a BÃ©zier curve (the BÃ©zier curve is tangent to the line between the control points at either end of the curve)
 	// Parameters:
 	// - x0, y0: Start point
 	// - x1, y1: Control point 1
@@ -167,7 +167,7 @@ class PdfDraw extends DecoratorPdf {
 	// - style: Style of ellipse (draw and/or fill: D, F, DF, FD, C (D + close))
 	// - line_style: Line style for ellipse. Array like for SetLineStyle
 	// - fill_color: Fill color. Array with components (red, green, blue)
-	// - nSeg: Ellipse is made up of nSeg Bézier curves
+	// - nSeg: Ellipse is made up of nSeg BÃ©zier curves
 	protected function Ellipse($x0, $y0, $rx, $ry = 0, $angle = 0, $astart = 0, $afinish = 360, $style = '', $line_style = null, $fill_color = null, $nSeg = 8) {
 		if ($rx) {
 			if (!(false === strpos($style, 'F')) && $fill_color) {
@@ -253,7 +253,7 @@ class PdfDraw extends DecoratorPdf {
 	// - style: Style of circle (draw and/or fill) (D, F, DF, FD, C (D + close))
 	// - line_style: Line style for circle. Array like for SetLineStyle
 	// - fill_color: Fill color. Array with components (red, green, blue)
-	// - nSeg: Ellipse is made up of nSeg Bézier curves
+	// - nSeg: Ellipse is made up of nSeg BÃ©zier curves
 	protected function Circle($x0, $y0, $r, $astart = 0, $afinish = 360, $style = '', $line_style = null, $fill_color = null, $nSeg = 8) {
 		$this->Ellipse($x0, $y0, $r, 0, 0, $astart, $afinish, $style, $line_style, $fill_color, $nSeg);
 	}
@@ -464,23 +464,24 @@ class PdfDraw extends DecoratorPdf {
 	// Sets a draw point
 	// Parameters:
 	// - x, y: Point
-	private function _Point($x, $y) {
+	public function _Point($x, $y) {
 		$this->pdf->_out(sprintf('%.2F %.2F m', $x * $this->pdf->k, ($this->pdf->h - $y) * $this->pdf->k));
 	}
 
 	// Draws a line from last draw point
 	// Parameters:
 	// - x, y: End point
-	private function _Line($x, $y) {
+
+	public function _Line($x, $y) {
 		$this->pdf->_out(sprintf('%.2F %.2F l', $x * $this->pdf->k, ($this->pdf->h - $y) * $this->pdf->k));
 	}
 
-	// Draws a Bézier curve from last draw point
+	// Draws a BÃ©zier curve from last draw point
 	// Parameters:
 	// - x1, y1: Control point 1
 	// - x2, y2: Control point 2
 	// - x3, y3: End point
-	private function _Curve($x1, $y1, $x2, $y2, $x3, $y3) {
+	public function _Curve($x1, $y1, $x2, $y2, $x3, $y3) {
 		$this->pdf->_out(sprintf('%.2F %.2F %.2F %.2F %.2F %.2F c', $x1 * $this->pdf->k, ($this->pdf->h - $y1) * $this->pdf->k, $x2 * $this->pdf->k, ($this->pdf->h - $y2) * $this->pdf->k, $x3 * $this->pdf->k, ($this->pdf->h - $y3) * $this->pdf->k));
 	}
 
