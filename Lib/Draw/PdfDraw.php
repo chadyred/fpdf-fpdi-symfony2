@@ -8,7 +8,7 @@ namespace Kark\EasyPdfBundle\Lib\Draw;
 
 use Kark\EasyPdfBundle\Lib\DecoratorPdf;
 
-class PDF_Draw extends DecoratorPdf {
+class PdfDraw extends DecoratorPdf {
 	// Sets line style
 	// Parameters:
 	// - style: Line style. Array with keys among the following:
